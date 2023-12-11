@@ -22,6 +22,8 @@ type InputProps = {
   inputContainerStyle?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<TextStyle>;
   returnKeyType?: any;
+  onChangeText?: any;
+  defaultValue?: any;
 };
 
 const Input = ({
@@ -35,6 +37,8 @@ const Input = ({
   inputContainerStyle,
   secureTextEntry,
   returnKeyType,
+  onChangeText,
+  defaultValue,
 }: InputProps) => {
   return (
     <View style={styles.container}>
@@ -48,6 +52,8 @@ const Input = ({
           keyboardType={keyboardType}
           secureTextEntry={secureTextEntry}
           returnKeyType={returnKeyType}
+          onChangeText={onChangeText}
+          defaultValue={defaultValue}
         />
         {rightIcon && rightIcon}
       </View>

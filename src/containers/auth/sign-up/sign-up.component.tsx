@@ -22,6 +22,9 @@ import {pxToPercentage} from '../../../core/libs/utils';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {eyeIcon, eyeSlashIcon} from '../../../assets/icons';
+import {useAppDispatch} from '../../../core/hooks/redux.hook';
+import {signup} from '../../../core/store/auth';
+
 type Props = {
   navigation?: any;
 };
@@ -68,7 +71,35 @@ const SignUp = ({navigation}: Props) => {
   });
 
   const [hidePassword, setHidePassword] = useState<boolean>(true);
+  const [username, setUsername] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
+  const dispatch = useAppDispatch();
+  const onSignUpPress = () => {
+    if (
+      !username.trim() ||
+      !phoneNumber.trim() ||
+      !password.trim() ||
+      !confirmPassword.trim()
+    ) {
+      console.log('Fill all information');
+      return;
+    }
+    if (password !== confirmPassword) {
+      console.log('Password not correct');
+      return;
+    }
+    dispatch(
+      signup({
+        username: username,
+        password: password,
+        phoneNumber: phoneNumber,
+      }),
+    );
+    navigation.popToTop();
+  };
   return (
     <ScrollView contentContainerStyle={styles.screen}>
       <KeyboardAvoidingView
@@ -92,14 +123,20 @@ const SignUp = ({navigation}: Props) => {
           <Text style={styles.pageTitle}>{'Rentee'}</Text>
           <View style={styles.form}>
             <View style={{}}>
-              <Input label="Your full name" placeholder="E.g. John Smith" />
+              <Input
+                label="Your full name"
+                placeholder="E.g. John Smith"
+                onChangeText={(value: string) => setUsername(value)}
+              />
               <Input
                 label="Phone number"
                 placeholder="Your phone number here"
+                onChangeText={(value: string) => setPhoneNumber(value)}
               />
               <Input
                 label="Password"
                 placeholder="Your new password"
+                onChangeText={(value: string) => setPassword(value)}
                 rightIcon={
                   <TouchableOpacity
                     onPress={() => setHidePassword(!hidePassword)}>
@@ -111,6 +148,7 @@ const SignUp = ({navigation}: Props) => {
               <Input
                 label="Retype your password"
                 placeholder="Retype your new password"
+                onChangeText={(value: string) => setConfirmPassword(value)}
                 rightIcon={
                   <TouchableOpacity
                     onPress={() => setHidePassword(!hidePassword)}>
@@ -121,10 +159,7 @@ const SignUp = ({navigation}: Props) => {
               />
             </View>
             <View style={styles.btnContainer}>
-              <Button
-                children="Sign Up"
-                onPress={() => navigation.popToTop()}
-              />
+              <Button children="Sign Up" onPress={onSignUpPress} />
               <Text style={styles.linkContainer}>
                 {'Already have an account?'}{' '}
                 <Link to={{screen: 'SignIn'}} style={styles.link}>

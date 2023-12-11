@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Dimensions, StatusBar, StyleSheet, Text} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Dimensions, Keyboard, StatusBar, StyleSheet, Text} from 'react-native';
 import {View} from 'react-native';
 import {imageLogo} from '../../../assets/images';
 import {pxToPercentage} from '../../../core/libs/utils';
@@ -12,6 +12,8 @@ import {Link} from '@react-navigation/native';
 import Input from '../../../components/input.component';
 import {eyeIcon, eyeSlashIcon} from '../../../assets/icons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useAppDispatch, useAppSelector} from '../../../core/hooks/redux.hook';
+import {login} from '../../../core/store/auth';
 
 type Props = {
   navigation?: any;
@@ -20,6 +22,11 @@ type Props = {
 const SignIn = ({navigation}: Props) => {
   const insets = useSafeAreaInsets();
   const [hidePassword, setHidePassword] = useState<boolean>(true);
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const dispatch = useAppDispatch();
+  const {createdUser} = useAppSelector(state => state.signup);
   const styles = StyleSheet.create({
     screen: {
       backgroundColor: themes['primary-1'],
@@ -67,6 +74,35 @@ const SignIn = ({navigation}: Props) => {
     },
     btnShowPassword: {},
   });
+
+  const onLoggedInPress = () => {
+    Keyboard.dismiss();
+    if (!phoneNumber.trim() || !password.trim()) {
+      console.log('Enter your phone number and password');
+      return;
+    }
+    if (
+      phoneNumber !== createdUser.phoneNumber ||
+      password !== createdUser.password
+    ) {
+      console.log('Invalid phone number or password');
+      return;
+    }
+    dispatch(login({username: createdUser.username, phoneNumber: phoneNumber}));
+    console.log('Logged In successful');
+  };
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      // Reset your state here
+      console.log('Reset');
+      setPhoneNumber('');
+      setPassword('');
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <View style={styles.screen}>
       <Icon
@@ -79,10 +115,17 @@ const SignIn = ({navigation}: Props) => {
       <Text style={styles.pageTitle}>{'Rentee'}</Text>
       <View style={styles.form}>
         <View>
-          <Input label="Phone number" placeholder="Your phone number here" />
+          <Input
+            label="Phone number"
+            onChangeText={(value: string) => setPhoneNumber(value)}
+            placeholder="Your phone number here"
+            defaultValue={phoneNumber}
+          />
           <Input
             label="Password"
             placeholder="Your password"
+            defaultValue={password}
+            onChangeText={(value: string) => setPassword(value)}
             rightIcon={
               <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
                 <Icon
@@ -101,10 +144,13 @@ const SignIn = ({navigation}: Props) => {
           onPress={() => navigation.navigate('ResetPassword')}
         />
         <View style={styles.btnContainer}>
-          <Button children="Sign In" />
+          <Button children="Sign In" onPress={onLoggedInPress} />
           <Text style={styles.linkContainer}>
             {'Don’t have an account?'}{' '}
-            <Link to={{screen: 'SignUp'}} style={styles.link}>
+            <Link
+              to={{screen: 'SignUp'}}
+              // action={navigation.replace('SignUp')}
+              style={styles.link}>
               Sign up
             </Link>
           </Text>
