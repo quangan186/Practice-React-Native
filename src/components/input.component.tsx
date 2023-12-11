@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
   container: {},
   label: {
     ...textFamily.notoSansBold,
+    color: 'black',
   },
   inputContainer: {
     marginVertical: 16,

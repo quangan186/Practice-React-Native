@@ -21,7 +21,7 @@ const sessionSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<UserModel>) => {
+    login: (state: any, action: PayloadAction<UserModel>) => {
       state.isLoggedin = true;
       state.user.username = action.payload.username;
       state.user.password = action.payload.password;

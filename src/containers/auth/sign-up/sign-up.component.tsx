@@ -33,8 +33,7 @@ const SignUp = ({navigation}: Props) => {
       backgroundColor: themes['primary-1'],
       flex: 1,
       alignItems: 'center',
-      // justifyContent: 'center',
-      paddingTop: insets.top,
+      paddingTop: insets.top + 40,
       paddingBottom: insets.bottom,
       paddingLeft: insets.left,
       paddingRight: insets.right,
@@ -122,7 +121,10 @@ const SignUp = ({navigation}: Props) => {
               />
             </View>
             <View style={styles.btnContainer}>
-              <Button children="Sign Up" />
+              <Button
+                children="Sign Up"
+                onPress={() => navigation.popToTop()}
+              />
               <Text style={styles.linkContainer}>
                 {'Already have an account?'}{' '}
                 <Link to={{screen: 'SignIn'}} style={styles.link}>

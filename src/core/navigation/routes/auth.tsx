@@ -9,7 +9,9 @@ type Props = {};
 const AuthNavigator = ({}: Props) => {
   const Stack = createStackNavigator();
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName="SignIn">
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="OTP" component={OtpConfirmation} />
       <Stack.Screen name="SignIn" component={SignIn} />

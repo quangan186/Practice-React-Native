@@ -9,18 +9,17 @@ import {default as themes} from '../../../core/themes/app-themes.json';
 import Button from '../../../components/button.component';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-type Props = {};
-const ResetPassword = ({}: Props) => {
+type Props = {
+  navigation?: any;
+};
+const ResetPassword = ({navigation}: Props) => {
   const insets = useSafeAreaInsets();
   const styles = StyleSheet.create({
     screen: {
       backgroundColor: themes['primary-1'],
       height: Dimensions.get('screen').height,
       alignItems: 'center',
-      // justifyContent: 'center',
-      paddingHorizontal: 12,
-      // Paddings to handle safe area
-      paddingTop: insets.top,
+      paddingTop: insets.top + 40,
       paddingBottom: insets.bottom,
       paddingLeft: insets.left,
       paddingRight: insets.right,
@@ -76,7 +75,10 @@ const ResetPassword = ({}: Props) => {
         />
         {/* </View> */}
         <View style={styles.btnSendCodeContainer}>
-          <Button children="Send code" />
+          <Button
+            children="Send code"
+            onPress={() => navigation.navigate('OTP')}
+          />
         </View>
       </View>
       <StatusBar backgroundColor={themes['primary-1']} />

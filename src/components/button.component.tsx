@@ -8,11 +8,12 @@ type ButtonProps = {
   children: string;
   btnStyle?: StyleProp<ViewStyle>;
   btnTextStyle?: StyleProp<TextStyle>;
+  onPress?: () => void;
 };
 
-const Button = ({children, btnStyle, btnTextStyle}: ButtonProps) => {
+const Button = ({children, btnStyle, btnTextStyle, onPress}: ButtonProps) => {
   return (
-    <TouchableOpacity style={[styles.btn, btnStyle]}>
+    <TouchableOpacity style={[styles.btn, btnStyle]} onPress={onPress}>
       <Text style={[styles.btnText, btnTextStyle]}>{children}</Text>
     </TouchableOpacity>
   );

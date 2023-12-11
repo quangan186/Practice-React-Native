@@ -1,8 +1,8 @@
 import {configureStore} from '@reduxjs/toolkit';
 import sessionSliceReducer from './auth/index';
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    auth: sessionSliceReducer, 
+    auth: sessionSliceReducer,
   },
 });
 

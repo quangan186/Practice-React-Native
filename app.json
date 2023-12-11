@@ -1,4 +1,5 @@
 {
   "name": "PracticeProject",
-  "displayName": "PracticeProject"
+  "displayName": "PracticeProject",
+  "jsEngine": "jsc"
 }

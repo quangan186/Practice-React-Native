@@ -13,9 +13,11 @@ import Input from '../../../components/input.component';
 import {eyeIcon, eyeSlashIcon} from '../../../assets/icons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-type Props = {};
+type Props = {
+  navigation?: any;
+};
 
-const SignIn = ({}: Props) => {
+const SignIn = ({navigation}: Props) => {
   const insets = useSafeAreaInsets();
   const [hidePassword, setHidePassword] = useState<boolean>(true);
   const styles = StyleSheet.create({
@@ -23,7 +25,6 @@ const SignIn = ({}: Props) => {
       backgroundColor: themes['primary-1'],
       height: Dimensions.get('screen').height,
       alignItems: 'center',
-      // justifyContent: 'center',
       paddingTop: insets.top + 40,
       paddingBottom: insets.bottom,
       paddingLeft: insets.left,
@@ -97,9 +98,10 @@ const SignIn = ({}: Props) => {
           children="Forgot you password"
           btnStyle={styles.btnForgotPassword}
           btnTextStyle={styles.btnForgotPasswordText}
+          onPress={() => navigation.navigate('ResetPassword')}
         />
         <View style={styles.btnContainer}>
-          <Button children="Sign Up" />
+          <Button children="Sign In" />
           <Text style={styles.linkContainer}>
             {'Don’t have an account?'}{' '}
             <Link to={{screen: 'SignUp'}} style={styles.link}>
