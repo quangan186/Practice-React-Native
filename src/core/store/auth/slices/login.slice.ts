@@ -3,7 +3,10 @@ import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 type LoginProps = {
   isLoggedin: boolean;
   user: UserModel;
-  password: '';
+};
+
+type SessionProps = {
+  session: LoginProps;
 };
 
 export interface UserModel {
@@ -15,13 +18,14 @@ export interface AccountModel extends UserModel {
   password: string;
 }
 
-const initialState: LoginProps = {
-  isLoggedin: false,
-  user: {
-    username: '',
-    phoneNumber: '',
+const initialState: SessionProps = {
+  session: {
+    isLoggedin: false,
+    user: {
+      username: '',
+      phoneNumber: '',
+    },
   },
-  password: '',
 };
 
 export const loginSlice = createSlice({
@@ -29,9 +33,9 @@ export const loginSlice = createSlice({
   initialState,
   reducers: {
     login: (state: any, action: PayloadAction<UserModel>) => {
-      state.isLoggedin = true;
-      state.user.username = action.payload.username;
-      state.user.phoneNumber = action.payload.phoneNumber;
+      state.session.isLoggedin = true;
+      state.session.user.username = action.payload.username;
+      state.session.user.phoneNumber = action.payload.phoneNumber;
     },
     logout: (state: any) => {
       state.user.isLoggedin = false;

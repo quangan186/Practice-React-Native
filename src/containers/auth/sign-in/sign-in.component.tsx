@@ -1,5 +1,12 @@
 import React, {useCallback, useState} from 'react';
-import {Dimensions, Keyboard, StatusBar, StyleSheet, Text} from 'react-native';
+import {
+  Dimensions,
+  Keyboard,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import {View} from 'react-native';
 import {imageLogo} from '../../../assets/images';
 import {pxToPercentage} from '../../../core/libs/utils';
@@ -11,7 +18,6 @@ import Button from '../../../components/button.component';
 import {Link, useFocusEffect} from '@react-navigation/native';
 import Input from '../../../components/input.component';
 import {eyeIcon, eyeSlashIcon} from '../../../assets/icons';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useAppDispatch, useAppSelector} from '../../../core/hooks/redux.hook';
 import {login} from '../../../core/store/auth';
 
@@ -96,7 +102,6 @@ const SignIn = ({navigation}: Props) => {
       return;
     }
     dispatch(login({username: createdUser.username, phoneNumber: phoneNumber}));
-    console.log('Logged In successful');
   };
 
   const resetState = useCallback(() => {

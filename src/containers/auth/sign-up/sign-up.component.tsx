@@ -2,7 +2,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
-  Dimensions,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -10,6 +9,7 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
 } from 'react-native';
 import Icon from '../../../components/icon.component';
 import {imageLogo} from '../../../assets/images';
@@ -20,7 +20,6 @@ import {textFamily} from '../../../components/text-style';
 import Button from '../../../components/button.component';
 import {pxToPercentage} from '../../../core/libs/utils';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {eyeIcon, eyeSlashIcon} from '../../../assets/icons';
 import {useAppDispatch} from '../../../core/hooks/redux.hook';
 import {signup} from '../../../core/store/auth';
