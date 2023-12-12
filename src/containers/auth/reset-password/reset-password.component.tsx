@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Dimensions, StatusBar, StyleSheet, Text, View} from 'react-native';
 import Icon from '../../../components/icon.component';
 import {verifyImage} from '../../../assets/images';
@@ -8,12 +8,22 @@ import {textFamily} from '../../../components/text-style';
 import {default as themes} from '../../../core/themes/app-themes.json';
 import Button from '../../../components/button.component';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useAppSelector} from '../../../core/hooks/redux.hook';
 
 type Props = {
   navigation?: any;
 };
 const ResetPassword = ({navigation}: Props) => {
   const insets = useSafeAreaInsets();
+  const {createdUser} = useAppSelector(state => state.signup);
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const onSendCodeBtnPress = () => {
+    if (phoneNumber !== createdUser.phoneNumber) {
+      console.log('This phone number has not been registered');
+      return;
+    }
+    navigation.navigate('OTP');
+  };
   const styles = StyleSheet.create({
     screen: {
       backgroundColor: themes['primary-1'],
@@ -72,13 +82,11 @@ const ResetPassword = ({navigation}: Props) => {
           returnKeyType="done"
           inputStyle={styles.inputPhoneNumberField}
           inputContainerStyle={styles.inputPhoneNumberFieldContainer}
+          onChangeText={(value: string) => setPhoneNumber(value)}
         />
         {/* </View> */}
         <View style={styles.btnSendCodeContainer}>
-          <Button
-            children="Send code"
-            onPress={() => navigation.navigate('OTP')}
-          />
+          <Button children="Send code" onPress={onSendCodeBtnPress} />
         </View>
       </View>
       <StatusBar backgroundColor={themes['primary-1']} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Dimensions, StatusBar, StyleSheet, Text, View} from 'react-native';
 import Icon from '../../../components/icon.component';
 import {verifyImage} from '../../../assets/images';
@@ -8,9 +8,56 @@ import {textFamily} from '../../../components/text-style';
 import {default as themes} from '../../../core/themes/app-themes.json';
 import Button from '../../../components/button.component';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {generateResetPasswordCode} from '../../../core/libs/generateCode';
 
 type Props = {navigation?: any};
 const OtpConfirmation = ({navigation}: Props) => {
+  const [time, setTime] = useState<number>(20);
+  // const [isResendCode, setIsResendCode] = useState<boolean>(false);
+  const otpRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
+  const [code, setCode] = useState<string>(generateResetPasswordCode());
+  const [inputCode, setInputCode] = useState<string[]>(['', '', '', '']);
+  useEffect(() => {
+    if (time <= 0) {
+      return;
+    }
+    const timeInterval = setInterval(() => {
+      setTime(time - 1);
+    }, 1000);
+    return () => clearInterval(timeInterval);
+  }, [time]);
+
+  const onResendCodePress = () => {
+    setCode(generateResetPasswordCode());
+    setTime(20);
+  };
+
+  const handleOTPChange = (text: string, index: number) => {
+    const newInputCode = [...inputCode];
+    newInputCode[index] = text;
+    setInputCode(newInputCode);
+
+    // Focus on next input field
+    if (text && index < otpRefs.length - 1) {
+      const nextInputRef: any = otpRefs[index + 1];
+      if (nextInputRef.current) {
+        nextInputRef.current.focus();
+      }
+    }
+  };
+
+  const onConfirmPress = () => {
+    if (inputCode.join('') !== code) {
+      console.log('Wrong code');
+      return;
+    }
+    if (time <= 0) {
+      console.log('Code expired!');
+      return;
+    }
+    navigation.popToTop();
+  };
+
   const insets = useSafeAreaInsets();
   const styles = StyleSheet.create({
     screen: {
@@ -49,17 +96,16 @@ const OtpConfirmation = ({navigation}: Props) => {
     },
     otpFieldContainer: {
       marginVertical: 0,
-      justifyContent: 'center',
-      alignItems: 'center',
       width: pxToPercentage(55),
+      paddingHorizontal: 0,
     },
     otpField: {
-      width: 'auto',
+      flex: 1,
     },
     btnResendContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginVertical: 20,
+      marginVertical: 12,
     },
     btnResend: {
       backgroundColor: 'transparent',
@@ -82,30 +128,36 @@ const OtpConfirmation = ({navigation}: Props) => {
           {'Please enter the verification code sent to your phone number'}
         </Text>
         <View style={styles.otpContainer}>
-          <Text>{'Your code here'}</Text>
+          <Text>
+            {'Your code here'} {code}
+          </Text>
           <View style={styles.inputContainer}>
-            {[...new Array(4)].map(item => (
+            {[...new Array(4)].map((item, index) => (
               <Input
-                key={item}
+                key={index}
                 maxLength={1}
                 keyboardType={'number-pad'}
                 inputStyle={styles.otpField}
                 inputContainerStyle={styles.otpFieldContainer}
                 returnKeyType="done"
+                onChangeText={(value: string) => handleOTPChange(value, index)}
+                _ref={otpRefs[index]}
+                textAlign="center"
               />
             ))}
           </View>
           <View style={styles.btnResendContainer}>
-            <Text>Expried after 12s</Text>
+            <Text>Expried {time > 0 && `after ${time}s`}</Text>
             <Button
               children="Resend"
+              onPress={onResendCodePress}
               btnStyle={styles.btnResend}
               btnTextStyle={styles.btnResendText}
             />
           </View>
         </View>
         <View style={styles.btnConfirmContainer}>
-          <Button children="Confirm" onPress={() => navigation.popToTop()} />
+          <Button children="Confirm" onPress={onConfirmPress} />
         </View>
       </View>
       <StatusBar backgroundColor={themes['primary-1']} />

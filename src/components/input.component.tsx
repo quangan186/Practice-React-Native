@@ -24,6 +24,8 @@ type InputProps = {
   returnKeyType?: any;
   onChangeText?: any;
   defaultValue?: any;
+  _ref?: React.MutableRefObject<any>;
+  textAlign?: any;
 };
 
 const Input = ({
@@ -39,6 +41,8 @@ const Input = ({
   returnKeyType,
   onChangeText,
   defaultValue,
+  _ref,
+  textAlign,
 }: InputProps) => {
   return (
     <View style={styles.container}>
@@ -54,6 +58,9 @@ const Input = ({
           returnKeyType={returnKeyType}
           onChangeText={onChangeText}
           defaultValue={defaultValue}
+          textAlign={textAlign}
+          ref={_ref}
+          onFocus={() => console.log(_ref?.current)}
         />
         {rightIcon && rightIcon}
       </View>

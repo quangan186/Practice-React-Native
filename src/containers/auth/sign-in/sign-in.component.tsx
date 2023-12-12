@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {Dimensions, Keyboard, StatusBar, StyleSheet, Text} from 'react-native';
 import {View} from 'react-native';
 import {imageLogo} from '../../../assets/images';
@@ -8,7 +8,7 @@ import {default as themes} from '../../../core/themes/app-themes.json';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from '../../../components/icon.component';
 import Button from '../../../components/button.component';
-import {Link} from '@react-navigation/native';
+import {Link, useFocusEffect} from '@react-navigation/native';
 import Input from '../../../components/input.component';
 import {eyeIcon, eyeSlashIcon} from '../../../assets/icons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -50,11 +50,18 @@ const SignIn = ({navigation}: Props) => {
       paddingHorizontal: 24,
       width: pxToPercentage(310),
     },
+    btnForgotPasswordContainer: {
+      flex: 0,
+      alignItems: 'flex-start',
+    },
     btnForgotPassword: {
       backgroundColor: 'transparent',
       paddingHorizontal: 0,
       height: 'auto',
       marginBottom: 20,
+      flex: 0,
+      alignSelf: 'stretch',
+      // alignItems: 'flex-start',
     },
     btnForgotPasswordText: {
       color: themes['primary-2'],
@@ -92,16 +99,21 @@ const SignIn = ({navigation}: Props) => {
     console.log('Logged In successful');
   };
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('blur', () => {
-      // Reset your state here
-      console.log('Reset');
-      setPhoneNumber('');
-      setPassword('');
-    });
+  const resetState = useCallback(() => {
+    setPhoneNumber('');
+    setPassword('');
+    // Add other state resets if needed
+  }, []);
 
-    return unsubscribe;
-  }, [navigation]);
+  // Use the useFocusEffect hook
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        // This is the cleanup function that runs when the screen loses focus
+        resetState();
+      };
+    }, [resetState]),
+  );
 
   return (
     <View style={styles.screen}>
@@ -137,12 +149,15 @@ const SignIn = ({navigation}: Props) => {
             secureTextEntry={hidePassword}
           />
         </View>
-        <Button
-          children="Forgot you password"
-          btnStyle={styles.btnForgotPassword}
-          btnTextStyle={styles.btnForgotPasswordText}
-          onPress={() => navigation.navigate('ResetPassword')}
-        />
+        <View style={styles.btnForgotPasswordContainer}>
+          <Button
+            children="Forgot you password"
+            btnStyle={styles.btnForgotPassword}
+            btnTextStyle={styles.btnForgotPasswordText}
+            onPress={() => navigation.navigate('ResetPassword')}
+          />
+        </View>
+
         <View style={styles.btnContainer}>
           <Button children="Sign In" onPress={onLoggedInPress} />
           <Text style={styles.linkContainer}>
