@@ -15,3 +15,15 @@ export const verifyImage: ImageSource = {
 export const avatarImage: ImageSource = {
   imageSource: require('./sources/ava.jpg'),
 };
+
+export const roomImage1: ImageSource = {
+  imageSource: require('./sources/room-img-1.png'),
+};
+
+export const roomImage2: ImageSource = {
+  imageSource: require('./sources/room-img-2.png'),
+};
+
+export const roomImage3: ImageSource = {
+  imageSource: require('./sources/room-img-3.png'),
+};

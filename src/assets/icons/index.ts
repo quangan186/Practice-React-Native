@@ -40,6 +40,10 @@ export const heartIcon: ImageSource = {
   imageSource: require('./sources/heart.png'),
 };
 
+export const boldHeartIcon: ImageSource = {
+  imageSource: require('./sources/bold-heart.png'),
+};
+
 export const selectedHeartIcon: ImageSource = {
   imageSource: require('./sources/selected-heart.png'),
 };
