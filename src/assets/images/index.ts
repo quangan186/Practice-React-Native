@@ -11,3 +11,7 @@ export const backgroundImage: ImageSource = {
 export const verifyImage: ImageSource = {
   imageSource: require('./sources/verify.png'),
 };
+
+export const avatarImage: ImageSource = {
+  imageSource: require('./sources/ava.jpg'),
+};

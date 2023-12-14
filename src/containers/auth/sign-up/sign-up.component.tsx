@@ -128,6 +128,7 @@ const SignUp = ({navigation}: Props) => {
                 onChangeText={(value: string) => setUsername(value)}
               />
               <Input
+                keyboardType="number-pad"
                 label="Phone number"
                 placeholder="Your phone number here"
                 onChangeText={(value: string) => setPhoneNumber(value)}

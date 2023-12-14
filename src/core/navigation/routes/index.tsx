@@ -13,11 +13,11 @@ const AppNavigator = (props: Props) => {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        {!session.isLoggedin || !session.user ? (
+        {/* {!session.isLoggedin || !session.user ? (
           <AuthNavigator />
-        ) : (
-          <BottomNavigator />
-        )}
+        ) : ( */}
+        <BottomNavigator />
+        {/* )} */}
       </NavigationContainer>
     </SafeAreaProvider>
   );

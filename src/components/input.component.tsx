@@ -46,7 +46,7 @@ const Input = ({
 }: InputProps) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
+      {label && <Text style={styles.label}>{label}</Text>}
       <View style={[styles.inputContainer, inputContainerStyle]}>
         {leftIcon && leftIcon}
         <TextInput
@@ -69,7 +69,9 @@ const Input = ({
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+  },
   label: {
     ...textFamily.notoSansBold,
     color: 'black',
