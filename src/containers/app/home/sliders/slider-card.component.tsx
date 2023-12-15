@@ -14,15 +14,19 @@ import {textFamily} from '../../../../components/text-style';
 import {ImageSource} from '../../../../assets/images/type';
 type Props = {
   source: ImageSource;
-  containerStyle?: any,
+  containerStyle?: any;
+  isActive?: boolean;
 };
 
-const SliderCard = ({source, containerStyle}: Props) => {
+const SliderCard = ({source, containerStyle, isActive = false}: Props) => {
   return (
     <View style={[styles.container, containerStyle]}>
       <ImageBackground
         source={source.imageSource}
-        style={styles.bgImage}
+        style={[
+          styles.bgImage,
+          isActive ? styles.activeCard : styles.unActiveCard,
+        ]}
         resizeMode="cover">
         <LinearGradient
           colors={['transparent', 'rgba(31, 31, 57, 0.9)']}
@@ -51,7 +55,7 @@ export default SliderCard;
 
 const styles = StyleSheet.create({
   container: {},
-  bgImage: {width: 263, height: 346, justifyContent: 'flex-end'},
+  bgImage: {justifyContent: 'flex-end'},
   bgGradient: {
     marginHorizontal: 8,
     marginVertical: 12,
@@ -86,5 +90,14 @@ const styles = StyleSheet.create({
     color: 'white',
     ...textFamily.PTSerifBold,
     fontWeight: '700',
+  },
+  activeCard: {
+    width: 263,
+    height: 346,
+    // bottom: 15,
+  },
+  unActiveCard: {
+    width: 237,
+    height: 312,
   },
 });

@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: themes['secondary-4'],
     marginVertical: 40,
     flexDirection: 'row',
+    marginHorizontal: 30,
   },
   tabBarBtn: {
     flex: 1,

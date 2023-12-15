@@ -7,14 +7,18 @@ import Input from '../../../../components/input.component';
 import {default as themes} from '../../../../core/themes/app-themes.json';
 import {avatarImage} from '../../../../assets/images';
 import {pxToPercentage} from '../../../../core/libs/utils';
-type Props = {};
+type Props = {
+  user: any;
+};
 
-const Header = ({}: Props) => {
+const Header = ({user}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.user}>
         <View style={styles.userInfo}>
-          <Text style={styles.intro}>Hi Josh, you are at</Text>
+          <Text style={styles.intro}>
+            Hi {user.username || 'Josh'}, you are at
+          </Text>
           <View style={styles.location}>
             <Icon source={locationIcon} />
             <Text style={styles.locationTitle}>Ho Chi Minh City, Vietnam</Text>

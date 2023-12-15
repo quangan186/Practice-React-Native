@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import SliderCard from './slider-card.component';
 import {roomImage1, roomImage2, roomImage3} from '../../../../assets/images';
@@ -7,10 +7,16 @@ type Props = {};
 
 const Slider = ({}: Props) => {
   return (
-    <View style={{position: 'relative'}}>
+    <View style={styles.container}>
       <SliderCard
         source={roomImage1}
-        containerStyle={{position: 'absolute', zIndex: 1, left: '50%', marginLeft: -263 / 2,}}
+        containerStyle={{
+          zIndex: 1,
+          left: '50%',
+          marginLeft: -263 / 2,
+          top: -20,
+        }}
+        isActive
       />
       <SliderCard
         source={roomImage2}
@@ -28,6 +34,6 @@ export default Slider;
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
+    marginHorizontal: 22,
   },
 });

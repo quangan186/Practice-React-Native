@@ -55,3 +55,15 @@ export const bagIcon: ImageSource = {
 export const selectedBagIcon: ImageSource = {
   imageSource: require('./sources/selected-bag.png'),
 };
+
+export const bedroomIcon: ImageSource = {
+  imageSource: require('./sources/bedroom.png'),
+};
+
+export const bathroomIcon: ImageSource = {
+  imageSource: require('./sources/bathroom.png'),
+};
+
+export const starIcon: ImageSource = {
+  imageSource: require('./sources/star.png'),
+};
