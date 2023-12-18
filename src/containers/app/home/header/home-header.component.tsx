@@ -6,18 +6,21 @@ import {filterIcon, locationIcon, searchIcon} from '../../../../assets/icons';
 import Input from '../../../../components/input.component';
 import {default as themes} from '../../../../core/themes/app-themes.json';
 import {avatarImage} from '../../../../assets/images';
-import {pxToPercentage} from '../../../../core/libs/utils';
+import {
+  capitalizeFirstLetter,
+  pxToPercentage,
+} from '../../../../core/libs/utils';
 type Props = {
   user: any;
 };
 
-const Header = ({user}: Props) => {
+const HomeHeader = ({user}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.user}>
         <View style={styles.userInfo}>
           <Text style={styles.intro}>
-            Hi {user.username || 'Josh'}, you are at
+            Hi {capitalizeFirstLetter(user.username) || 'Josh'}, you are at
           </Text>
           <View style={styles.location}>
             <Icon source={locationIcon} />
@@ -48,6 +51,7 @@ const Header = ({user}: Props) => {
               <Icon source={searchIcon} />
             </TouchableOpacity>
           }
+          containerStyle={styles.searchContainerStyle}
           inputContainerStyle={styles.searchInputContainer}
           inputStyle={styles.searchInput}
         />
@@ -63,9 +67,8 @@ const Header = ({user}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: themes['primary-1'],
     backgroundColor: themes['primary-1'],
-    borderBottomLeftRadius: 50,
+    borderBottomLeftRadius: 40,
     paddingHorizontal: 30,
     paddingBottom: 40,
     // paddingTop: 60,
@@ -89,8 +92,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 12,
   },
+  searchContainerStyle: {
+    flex: 1,
+  },
   searchInputContainer: {
     marginVertical: 0,
+    flex: 1,
   },
   searchInput: {
     paddingVertical: 0,
@@ -104,4 +111,4 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
-export default Header;
+export default HomeHeader;

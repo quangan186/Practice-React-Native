@@ -12,7 +12,7 @@ import {imageLogo} from '../../../assets/images';
 import {pxToPercentage} from '../../../core/libs/utils';
 import {textFamily} from '../../../components/text-style';
 import {default as themes} from '../../../core/themes/app-themes.json';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+// import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from '../../../components/icon.component';
 import Button from '../../../components/button.component';
 import {Link, useFocusEffect} from '@react-navigation/native';
@@ -26,67 +26,13 @@ type Props = {
 };
 
 const SignIn = ({navigation}: Props) => {
-  const insets = useSafeAreaInsets();
+  // const insets = useSafeAreaInsets();
   const [hidePassword, setHidePassword] = useState<boolean>(true);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const dispatch = useAppDispatch();
   const {createdUser} = useAppSelector(state => state.signup);
-  const styles = StyleSheet.create({
-    screen: {
-      backgroundColor: themes['primary-1'],
-      height: Dimensions.get('screen').height,
-      alignItems: 'center',
-      paddingTop: insets.top + 40,
-      paddingBottom: insets.bottom,
-      paddingLeft: insets.left,
-      paddingRight: insets.right,
-    },
-    pageTitle: {
-      color: 'white',
-      fontSize: 20,
-      ...textFamily.notoSansBold,
-      paddingVertical: 12,
-    },
-    form: {
-      backgroundColor: 'white',
-      borderRadius: 25,
-      paddingVertical: 28,
-      paddingHorizontal: 24,
-      width: pxToPercentage(310),
-    },
-    btnForgotPasswordContainer: {
-      flex: 0,
-      alignItems: 'flex-start',
-    },
-    btnForgotPassword: {
-      backgroundColor: 'transparent',
-      paddingHorizontal: 0,
-      height: 'auto',
-      marginBottom: 20,
-      flex: 0,
-      alignSelf: 'stretch',
-      // alignItems: 'flex-start',
-    },
-    btnForgotPasswordText: {
-      color: themes['primary-2'],
-    },
-    btnContainer: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: 12,
-    },
-    linkContainer: {
-      fontSize: 12,
-      color: themes['secondary-2'],
-      ...textFamily.notoSansRegular,
-    },
-    link: {
-      color: themes['primary-2'],
-    },
-    btnShowPassword: {},
-  });
 
   const onLoggedInPress = () => {
     Keyboard.dismiss();
@@ -131,7 +77,7 @@ const SignIn = ({navigation}: Props) => {
       />
       <Text style={styles.pageTitle}>{'Rentee'}</Text>
       <View style={styles.form}>
-        <View>
+        <View style={{}}>
           <Input
             label="Phone number"
             onChangeText={(value: string) => setPhoneNumber(value)}
@@ -181,4 +127,55 @@ const SignIn = ({navigation}: Props) => {
   );
 };
 
+const styles = StyleSheet.create({
+  screen: {
+    backgroundColor: themes['primary-1'],
+    height: Dimensions.get('screen').height,
+    alignItems: 'center',
+  },
+  pageTitle: {
+    color: 'white',
+    fontSize: 20,
+    ...textFamily.notoSansBold,
+    paddingVertical: 12,
+  },
+  form: {
+    backgroundColor: 'white',
+    borderRadius: 25,
+    paddingVertical: 28,
+    paddingHorizontal: 24,
+    width: pxToPercentage(310),
+    // height: 'auto'
+  },
+  btnForgotPasswordContainer: {
+    flex: 0,
+    alignItems: 'flex-start',
+  },
+  btnForgotPassword: {
+    backgroundColor: 'transparent',
+    paddingHorizontal: 0,
+    height: 'auto',
+    marginBottom: 20,
+    flex: 0,
+    alignSelf: 'stretch',
+    alignItems: 'flex-start',
+  },
+  btnForgotPasswordText: {
+    color: themes['primary-2'],
+  },
+  btnContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 12,
+  },
+  linkContainer: {
+    fontSize: 12,
+    color: themes['secondary-2'],
+    ...textFamily.notoSansRegular,
+  },
+  link: {
+    color: themes['primary-2'],
+  },
+  btnShowPassword: {},
+});
 export default SignIn;

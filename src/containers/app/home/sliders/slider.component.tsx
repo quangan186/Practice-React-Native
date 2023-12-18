@@ -10,22 +10,11 @@ const Slider = ({}: Props) => {
     <View style={styles.container}>
       <SliderCard
         source={roomImage1}
-        containerStyle={{
-          zIndex: 1,
-          left: '50%',
-          marginLeft: -263 / 2,
-          top: -20,
-        }}
+        containerStyle={styles.activeCard}
         isActive
       />
-      <SliderCard
-        source={roomImage2}
-        containerStyle={{position: 'absolute', left: 0}}
-      />
-      <SliderCard
-        source={roomImage3}
-        containerStyle={{position: 'absolute', right: 0}}
-      />
+      <SliderCard source={roomImage2} containerStyle={styles.prevCard} />
+      <SliderCard source={roomImage3} containerStyle={styles.nextCard} />
     </View>
   );
 };
@@ -35,5 +24,13 @@ export default Slider;
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 22,
+  },
+  nextCard: {position: 'absolute', right: 0},
+  prevCard: {position: 'absolute', left: 0},
+  activeCard: {
+    zIndex: 1,
+    left: '50%',
+    marginLeft: -263 / 2,
+    top: -20,
   },
 });

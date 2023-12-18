@@ -10,3 +10,7 @@ export const pxToPercentage = (value: number): number => {
 export const isEmpty = (value: any): boolean => {
   return value === undefined || value === '' || value === null;
 };
+
+export const capitalizeFirstLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};

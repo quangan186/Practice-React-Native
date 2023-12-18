@@ -26,6 +26,7 @@ type InputProps = {
   defaultValue?: any;
   _ref?: React.MutableRefObject<any>;
   textAlign?: any;
+  containerStyle?: any;
 };
 
 const Input = ({
@@ -43,9 +44,10 @@ const Input = ({
   defaultValue,
   _ref,
   textAlign,
+  containerStyle,
 }: InputProps) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       {label && <Text style={styles.label}>{label}</Text>}
       <View style={[styles.inputContainer, inputContainerStyle]}>
         {leftIcon && leftIcon}
@@ -70,7 +72,8 @@ const Input = ({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
+    // width: Dimensions.get('window').width,
   },
   label: {
     ...textFamily.notoSansBold,
@@ -84,7 +87,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // flex: 1,
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingLeft: 10,
+    paddingRight: 20,
   },
   input: {
     flex: 1,

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
@@ -17,8 +18,8 @@ const AppNavigator = (props: Props) => {
         style={{flex: 1, backgroundColor: themes['primary-1']}}>
         <NavigationContainer>
           {/* {!session.isLoggedin || !session.user ? (
-          <AuthNavigator />
-        ) : ( */}
+            <AuthNavigator />
+          ) : ( */}
           <BottomNavigator />
           {/* )} */}
         </NavigationContainer>

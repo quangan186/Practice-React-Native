@@ -29,46 +29,6 @@ type Props = {
 };
 
 const SignUp = ({navigation}: Props) => {
-  const insets = useSafeAreaInsets();
-  const styles = StyleSheet.create({
-    screen: {
-      backgroundColor: themes['primary-1'],
-      flex: 1,
-      alignItems: 'center',
-      paddingTop: insets.top + 40,
-      paddingBottom: insets.bottom,
-      paddingLeft: insets.left,
-      paddingRight: insets.right,
-    },
-    pageTitle: {
-      color: 'white',
-      fontSize: 20,
-      ...textFamily.notoSansBold,
-      paddingVertical: 12,
-    },
-    form: {
-      backgroundColor: 'white',
-      borderRadius: 25,
-      paddingVertical: 28,
-      paddingHorizontal: 24,
-      gap: 12,
-      width: pxToPercentage(310),
-    },
-    btnContainer: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: 12,
-    },
-    linkContainer: {
-      fontSize: 12,
-      color: themes['secondary-2'],
-      ...textFamily.notoSansRegular,
-    },
-    link: {
-      color: themes['primary-2'],
-    },
-  });
-
   const [hidePassword, setHidePassword] = useState<boolean>(true);
   const [username, setUsername] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
@@ -175,4 +135,38 @@ const SignUp = ({navigation}: Props) => {
   );
 };
 
+const styles = StyleSheet.create({
+  screen: {
+    backgroundColor: themes['primary-1'],
+    flex: 1,
+    alignItems: 'center',
+  },
+  pageTitle: {
+    color: 'white',
+    fontSize: 20,
+    ...textFamily.notoSansBold,
+    paddingVertical: 12,
+  },
+  form: {
+    backgroundColor: 'white',
+    borderRadius: 25,
+    paddingVertical: 28,
+    paddingHorizontal: 24,
+    gap: 12,
+    width: pxToPercentage(310),
+  },
+  btnContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 12,
+  },
+  linkContainer: {
+    fontSize: 12,
+    color: themes['secondary-2'],
+    ...textFamily.notoSansRegular,
+  },
+  link: {
+    color: themes['primary-2'],
+  },
+});
 export default SignUp;

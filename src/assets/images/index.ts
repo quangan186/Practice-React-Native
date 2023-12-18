@@ -59,3 +59,23 @@ export const roomRecommendImage1: ImageSource = {
 export const roomRecommendImage2: ImageSource = {
   imageSource: require('./sources/room-recommend-2.png'),
 };
+
+export const roomBookingImage1: ImageSource = {
+  imageSource: require('./sources/room-booking-1.png'),
+};
+
+export const roomBookingImage2: ImageSource = {
+  imageSource: require('./sources/room-booking-2.png'),
+};
+
+export const roomBookingImage3: ImageSource = {
+  imageSource: require('./sources/room-booking-3.png'),
+};
+
+export const giftImage: ImageSource = {
+  imageSource: require('./sources/gift.png'),
+};
+
+export const roomBookingImage4: ImageSource = {
+  imageSource: require('./sources/room-booking-4.png'),
+};

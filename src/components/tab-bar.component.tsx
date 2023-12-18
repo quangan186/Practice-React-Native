@@ -1,14 +1,22 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ViewStyle,
+} from 'react-native';
 import React, {useState} from 'react';
 import {default as themes} from '../core/themes/app-themes.json';
 type Props = {
   categories: string[];
+  containerStyle?: ViewStyle;
 };
 
-const TabBar = ({categories}: Props) => {
+const TabBar = ({categories, containerStyle}: Props) => {
   const [active, setAcitve] = useState<string>(categories[0]!);
   return (
-    <View style={styles.tabBar}>
+    <View style={[styles.tabBar, containerStyle]}>
       {categories.map(category => {
         return (
           <TouchableOpacity

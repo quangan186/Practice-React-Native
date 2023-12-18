@@ -8,7 +8,6 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import Header from './header/header.component';
 import {default as themes} from '../../../core/themes/app-themes.json';
 import TabBar from '../../../components/tab-bar.component';
 import {
@@ -23,7 +22,8 @@ import ScrollHorizontalBar from './scroll-horizontal/scroll-horizontal-bar.compo
 import Icon from '../../../components/icon.component';
 import {textFamily} from '../../../components/text-style';
 import RoomCard from '../../../components/room-card.component';
-import { useAppSelector } from '../../../core/hooks/redux.hook';
+import {useAppSelector} from '../../../core/hooks/redux.hook';
+import HomeHeader from './header/home-header.component';
 
 type Props = {};
 
@@ -33,9 +33,9 @@ const Home = ({}: Props) => {
     roomCategories[0]?.type!,
   );
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <View style={styles.headerContainer}>
-        <Header user={session.user} />
+        <HomeHeader user={session.user} />
       </View>
       <View style={styles.mainContainer}>
         <TabBar categories={homeTabBarCategory} />
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     backgroundColor: 'white',
-    borderTopRightRadius: 50,
+    borderTopRightRadius: 40,
     paddingBottom: 120,
   },
   categoryTabContainer: {

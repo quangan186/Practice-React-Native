@@ -67,3 +67,23 @@ export const bathroomIcon: ImageSource = {
 export const starIcon: ImageSource = {
   imageSource: require('./sources/star.png'),
 };
+
+export const backIcon: ImageSource = {
+  imageSource: require('./sources/back.png'),
+};
+
+export const orangeDotIcon: ImageSource = {
+  imageSource: require('./sources/orange-dot.png'),
+};
+
+export const threeDotsIcon: ImageSource = {
+  imageSource: require('./sources/three-dots.png'),
+};
+
+export const blueDotIcon: ImageSource = {
+  imageSource: require('./sources/blue-dot.png'),
+};
+
+export const seenDotIcon: ImageSource = {
+  imageSource: require('./sources/seen-dot.png'),
+};
